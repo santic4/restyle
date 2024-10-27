@@ -1,0 +1,1 @@
+export { usersManager } from './mongoose/userModel.js'

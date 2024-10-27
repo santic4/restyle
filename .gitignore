@@ -1,0 +1,30 @@
+/node_modules
+.env
+firebase.json
+env
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+node_modules
+/.env
+# Entornos de desarrollo
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+node_modules
+
+/src/config/serviceAccountKey.json
+src/config/serviceAccountKey.json
+/src/config/serviceAccountKey.json
+
+src/config/firebase-config.js
+/src/config/firebase-config.js
+
+serviceAccountKey.json
+
+package-lock.json
+ngrok.exe
