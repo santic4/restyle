@@ -63,7 +63,7 @@ class ProductServices{
 
 
     async getAllProductsAdmin(){
-        console.log('repositrsaeres')
+        
         const productAdmin = await productRepository.getAllProductsAdmin()
 
         return productAdmin
@@ -170,7 +170,7 @@ class ProductServices{
             for (const imageUrl of product.images) {
                 // Extraer el nombre del archivo de la URL
                 const fileName = decodeURIComponent(imageUrl.split('/o/')[1].split('?')[0]);
-                console.log(fileName,'filename')
+          
                 const file = bucket.file(`${fileName}`);
                 await file.delete();
             }

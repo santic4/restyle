@@ -21,8 +21,6 @@ node_modules
 src/config/serviceAccountKey.json
 /src/config/serviceAccountKey.json
 
-src/config/firebase-config.js
-/src/config/firebase-config.js
 
 serviceAccountKey.json
 
