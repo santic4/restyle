@@ -1,4 +1,4 @@
-import { bucket } from "../../config/firebase-config.js";
+// import { bucket } from "../../config/firebase-config.js";
 import { Category } from "../../models/mongoose/categories.js";
 import { Product } from "../../models/mongoose/productModel.js";
 import { productServices } from "../../services/products/productServices.js";
@@ -101,13 +101,13 @@ export const postProduct = async (req, res, next) => {
 
     const imageUrls = [];
 
-    // Subir imágenes a Firebase Storage
+    /* Subir imágenes a Firebase Storage
     for (const file of imageFiles) {
       const fileUpload = bucket.file(`images/${file.originalname}`);
       await fileUpload.save(file.buffer, { contentType: file.mimetype });
       const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURIComponent(fileUpload.name)}?alt=media`;
       imageUrls.push(imageUrl);
-    }
+    }*/
     
     // Guardar las URLs en el objeto newData
     newData.images = imageUrls;
