@@ -6,7 +6,6 @@ import { usersRouter } from './users/usersRouter.js'
 import { sessionRouter } from './users/sessionRouter.js'
 import { carritoRouter } from './carrito/carritoRouter.js'
 import { productsRouter } from './products/productsRouter.js'
-import { PayPalRouter } from './paymentsRouter/payPalRouter.js'
 import { MercadoPagoRouter } from './paymentsRouter/mercadoPagoRouter.js'
 import { categoryRouter } from './products/categoryRouter.js'
 import { CardsPay } from './paymentsRouter/cardsPay.js'
@@ -22,7 +21,6 @@ apiRouter.use('/session', sessionRouter)
 apiRouter.use('/productos', productsRouter)
 apiRouter.use('/admin', adminRouter)
 apiRouter.use('/carrito', carritoRouter)
-apiRouter.use('/paypal', PayPalRouter)
 apiRouter.use('/mercado-pago', MercadoPagoRouter)
 apiRouter.use('/categorias', categoryRouter)
 apiRouter.use('/tarjetas', CardsPay)
