@@ -8,7 +8,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-// import { bucket } from "../../config/firebase-config.js";
+import { bucket } from "../../config/firebase-config.js";
 
 // Definir __filename y __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -18,7 +18,6 @@ const __dirname = dirname(__filename);
 const photosDirectory = path.join(__dirname, '../../../statics/photos');
 
 class ProductServices{
-
     async getAllProducts(filter, options){
         
         const paginado = await productRepository.getAllProducts(filter, options)
@@ -64,7 +63,7 @@ class ProductServices{
 
 
     async getAllProductsAdmin(){
-        
+        console.log('repositrsaeres')
         const productAdmin = await productRepository.getAllProductsAdmin()
 
         return productAdmin
@@ -109,13 +108,13 @@ class ProductServices{
 
             const imageUrls = [];
     
-            /* Subir imágenes a Firebase Storage
+            // Subir imágenes a Firebase Storage
             for (const file of imageFiles) {
               const fileUpload = bucket.file(`images/${file.originalname}`);
               await fileUpload.save(file.buffer, { contentType: file.mimetype });
               const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURIComponent(fileUpload.name)}?alt=media`;
               imageUrls.push(imageUrl);
-            }*/
+            }
     
             const updatedImageUrls = [...(product.images || []), ...imageUrls];
     
@@ -167,7 +166,6 @@ class ProductServices{
         // Elimina el producto de la base de datos
         const delProducto = await productRepository.deleteProduct(pid);
     
-        /* 
         if (product.images && product.images.length > 0) {
             for (const imageUrl of product.images) {
                 // Extraer el nombre del archivo de la URL
@@ -176,7 +174,7 @@ class ProductServices{
                 const file = bucket.file(`${fileName}`);
                 await file.delete();
             }
-        }*/
+        }
 
         // Envía notificación si es necesario
         if (delProducto && Usuario.rol === 'premium') {
