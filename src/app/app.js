@@ -11,23 +11,23 @@ import { MONGODB, PORT } from '../config/config.js';
 import { logger } from '../utils/logger.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
-import cors from 'cors'
+// import cors from 'cors'
 
 dotenv.config()
 export const app = express();
 
 app.use(express.static(path.join('public', 'build')));
 
-app.use(cors({
-    origin: 'https://restyle-869o.onrender.com',
-    credentials: true 
-}));
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://restyle-869o.onrender.com');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    next();
-});
+// app.use(cors({
+//     origin: 'https://restyle-869o.onrender.com',
+//     credentials: true 
+// }));
+// 
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', 'https://restyle-869o.onrender.com');
+//     res.header('Access-Control-Allow-Credentials', 'true');
+//     next();
+// });
 
  process.on('unhandledRejection', (error) => {
      console.error('Unhandled Promise Rejection:', error);
