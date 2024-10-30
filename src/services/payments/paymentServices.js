@@ -34,8 +34,6 @@ class PaymentsServicesMP{
   
             const preference = new Preference(client);
 
-            console.log(preference,'preference')
-    
             const response = await preference.create({
                 body: {
                     additional_info: 'RESTYLE',
