@@ -60,7 +60,7 @@ class PaymentsServicesMP{
                         },
                         identification: {
                             type: 'DNI',
-                            number: client.DNI
+                            number: client.dni
                         },
                         date_created: new Date().toISOString()
                     },
