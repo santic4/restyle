@@ -4,14 +4,14 @@ import { DataInvalid } from '../../models/errors/dataInvalid.js';
 import { ACCESS_TOKEN_MP } from '../../config/config.js';
 
 const client = new MercadoPagoConfig({
-    accessToken: 'TEST-1227822103444956-080520-2afbbb21f9bafb981c29a4c4c4ab8579-674717908',
+    accessToken: ACCESS_TOKEN_MP,
     options: { timeout: 20000, idempotencyKey: 'abc' }
 })
 
 class PaymentsServicesMP{
 
     async createOrder(items, carrito, externalReference, client, totalPrice, shippingCost){
-
+        console.log(ACCESS_TOKEN_MP,'accesss ')
         try {
 
             if (!client) {
