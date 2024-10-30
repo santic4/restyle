@@ -18,26 +18,21 @@ export const app = express();
 
 app.use(express.static(path.join('public', 'build')));
 
- app.use(cors({
-     origin: 'https://restyle-869o.onrender.com',
-     credentials: true 
- }));
- 
- app.use((req, res, next) => {
-     res.header('Access-Control-Allow-Origin', 'https://restyle-869o.onrender.com');
-     res.header('Access-Control-Allow-Credentials', 'true');
-     next();
- });
+// Middleware de CORS
+app.use(cors({
+    origin: 'https://restyle-869o.onrender.com', // Permitir solicitudes desde este origen
+    credentials: true // Permitir enviar cookies y cabeceras de autenticación
+}));
 
- process.on('unhandledRejection', (error) => {
-     console.error('Unhandled Promise Rejection:', error);
-   });
-   
- // Middleware de CSP
- app.use((req, res, next) => {
+process.on('unhandledRejection', (error) => {
+    console.error('Unhandled Promise Rejection:', error);
+});
+
+// Middleware de CSP
+app.use((req, res, next) => {
     res.setHeader(
         "Content-Security-Policy",
-        "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' https://api.paypal.com https://api.mercadopago.com; font-src 'self' data:;"
+        "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' https://api.paypal.com https://api.mercadopago.com;"
     );
     next();
 });
