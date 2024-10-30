@@ -10,11 +10,11 @@ const client = new MercadoPagoConfig({
 
 class PaymentsServicesMP{
 
-    async createOrder(items, carrito, emailSend, externalReference, clientData, total){
+    async createOrder(items, carrito, externalReference, client, totalPrice, shippingCost){
 
         try {
 
-            if (!clientData) {
+            if (!client) {
                 throw new Error('Falta información requerida (información personal)');
             }
 
@@ -34,32 +34,33 @@ class PaymentsServicesMP{
   
             const preference = new Preference(client);
 
+    
             const response = await preference.create({
                 body: {
-                    additional_info: 'ALFIL DIGITAL',
+                    additional_info: 'RE STYLE',
                     auto_return: 'approved',
                     back_urls: {
-                        success: 'https://alfildigital.com.ar',
-                        failure: 'https://alfildigital.com.ar',
-                        pending: 'https://alfildigital.com.ar'
+                        success: 'https://be44-191-102-247-165.ngrok-free.app',
+                        failure: 'https://be44-191-102-247-165.ngrok-free.app',
+                        pending: 'https://be44-191-102-247-165.ngrok-free.app'
                     },
                     expiration_date_from: new Date().toISOString(),
                     expiration_date_to: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString(), 
                     expires: false,
                     external_reference: externalReference,
                     items: carrito,
-                    notification_url: 'https://alfildigital.com.ar/api/cards/webhook',
+                    notification_url: 'https://be44-191-102-247-165.ngrok-free.app/api/cards/webhook',
                     payer: {
-                        name: clientData.Nombre,
-                        surname: clientData.Apellido,
-                        email: emailSend,
+                        name: client.name,
+                        surname: client.lastName,
+                        email: client.email,
                         phone: {
-                            area_code: clientData.CodArea,
-                            number: clientData.Telefono
+                            area_code: client.areaCode,
+                            number: client.phoneNumber
                         },
                         identification: {
                             type: 'DNI',
-                            number: clientData.DNI
+                            number: client.DNI
                         },
                         date_created: new Date().toISOString()
                     },
@@ -72,6 +73,7 @@ class PaymentsServicesMP{
                 }
             });
 
+            console.log('pase')
             const allFileadj = items.flatMap(item => 
                 item.productID.fileadj.map(file => ({
                     url: file.url, 
@@ -79,8 +81,8 @@ class PaymentsServicesMP{
                 }))
             );
    
-            if(emailSend && externalReference){
-                await saveTransactionWithToken(emailSend, externalReference, response.id, allFileadj, total, clientData);
+            if(client.email && externalReference){
+                await saveTransactionWithToken(client.email, externalReference, response.id, allFileadj, totalPrice, client);
             }else{
                 throw new DataInvalid()
             }        

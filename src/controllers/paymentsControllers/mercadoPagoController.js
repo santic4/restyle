@@ -4,12 +4,13 @@ import { findTransactionByPaymentId } from '../../services/transactions/transact
 import { paymentsServicesMP } from '../../services/payments/paymentServices.js';
 
 export const createOrderMP = async (req, res) => {
-    const { items, carrito, client, total } = req.body;
-    const { emailSend } = req.query;
+
+    const { items, carrito, client, totalPrice, shippingCost } = req.body;
 
     try {
+
         const externalReference = generateToken();
-        const response = await paymentsServicesMP.createOrder(items, carrito, emailSend, externalReference, client, total);
+        const response = await paymentsServicesMP.createOrder(items, carrito, externalReference, client, totalPrice, shippingCost);
 
         res.status(200).json(response);
     } catch (error) {
@@ -23,7 +24,7 @@ export const successOrder = async (req, res) => {
         const{ payment_id} = req.query;
 
         if (payment_id) {
-            res.redirect(`https://alfildigital.com.ar?payment_id=${payment_id}`);
+            res.redirect(`https://restyle-869o.onrender.com?payment_id=${payment_id}`);
         } else {
             throw new Error('Transacción no encontrada o no coincide con el payment_id');
         }
