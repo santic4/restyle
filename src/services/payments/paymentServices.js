@@ -40,16 +40,16 @@ class PaymentsServicesMP{
                     additional_info: 'RE STYLE',
                     auto_return: 'approved',
                     back_urls: {
-                        success: 'https://be44-191-102-247-165.ngrok-free.app',
-                        failure: 'https://be44-191-102-247-165.ngrok-free.app',
-                        pending: 'https://be44-191-102-247-165.ngrok-free.app'
+                        success: 'https://restyle-869o.onrender.com',
+                        failure: 'https://restyle-869o.onrender.com',
+                        pending: 'https://restyle-869o.onrender.com'
                     },
                     expiration_date_from: new Date().toISOString(),
                     expiration_date_to: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString(), 
                     expires: false,
                     external_reference: externalReference,
                     items: carrito,
-                    notification_url: 'https://be44-191-102-247-165.ngrok-free.app/api/cards/webhook',
+                    notification_url: 'https://restyle-869o.onrender.com/api/cards/webhook',
                     payer: {
                         name: client.name,
                         surname: client.lastName,
@@ -98,6 +98,7 @@ class PaymentsServicesMP{
         const application = new Payment(client);
             try {
 
+                console.log('webhook',payment)
           
                 if (payment.type === 'payment') {
             
