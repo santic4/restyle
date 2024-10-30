@@ -4,7 +4,7 @@ import { DataInvalid } from '../../models/errors/dataInvalid.js';
 import { ACCESS_TOKEN_MP } from '../../config/config.js';
 
 const client = new MercadoPagoConfig({
-    accessToken: ACCESS_TOKEN_MP,
+    accessToken: 'TEST-1227822103444956-080520-2afbbb21f9bafb981c29a4c4c4ab8579-674717908',
     options: { timeout: 20000, idempotencyKey: 'abc' }
 })
 
