@@ -37,7 +37,7 @@ class PaymentsServicesMP{
     
             const response = await preference.create({
                 body: {
-                    additional_info: 'RE STYLE',
+                    additional_info: 'RESTYLE',
                     auto_return: 'approved',
                     back_urls: {
                         success: 'https://restyle-869o.onrender.com',
