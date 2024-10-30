@@ -5,7 +5,7 @@ import { ACCESS_TOKEN_MP } from '../../config/config.js';
 
 const client = new MercadoPagoConfig({
     accessToken: ACCESS_TOKEN_MP,
-    options: { timeout: 10000, idempotencyKey: 'abc' }
+    options: { timeout: 20000, idempotencyKey: 'abc' }
 })
 
 class PaymentsServicesMP{
@@ -34,6 +34,7 @@ class PaymentsServicesMP{
   
             const preference = new Preference(client);
 
+            console.log(preference,'preference')
     
             const response = await preference.create({
                 body: {
