@@ -11,7 +11,7 @@ const client = new MercadoPagoConfig({
 class PaymentsServicesMP{
 
     async createOrder(items, carrito, externalReference, client, totalPrice, shippingCost){
-        console.log(ACCESS_TOKEN_MP,'accesss ')
+
         try {
 
             if (!client) {
