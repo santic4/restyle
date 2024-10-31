@@ -3,7 +3,7 @@ import { findTransactionByPaymentId, saveTransactionWithToken, updateTransaction
 import { DataInvalid } from '../../models/errors/dataInvalid.js';
 import { ACCESS_TOKEN_MP } from '../../config/config.js';
 
-const client = new MercadoPagoConfig({
+const clientConfig = new MercadoPagoConfig({
     accessToken: ACCESS_TOKEN_MP,
     options: { timeout: 20000, idempotencyKey: 'abc' }
 })
@@ -32,7 +32,7 @@ class PaymentsServicesMP{
                 }
             });  
   
-            const preference = new Preference(client);
+            const preference = new Preference(clientConfig);
 
             const response = await preference.create({
                 body: {
@@ -94,7 +94,7 @@ class PaymentsServicesMP{
     }
 
     async webHook(payment){
-        const application = new Payment(client);
+        const application = new Payment(clientConfig);
             try {
 
                 console.log('webhook',payment)
