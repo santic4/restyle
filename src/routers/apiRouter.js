@@ -26,6 +26,7 @@ apiRouter.use('/categorias', categoryRouter)
 apiRouter.use('/tarjetas', CardsPay)
 
 
+
 // MIDDLEWARES
 
 apiRouter.use(errorHandlerLogger)
