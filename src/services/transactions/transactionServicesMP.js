@@ -1,13 +1,14 @@
 import { transactionsDao } from "../../DAO/MongooseDAO.js/transactionsDao.js";
 import { DataInvalid } from "../../models/errors/dataInvalid.js";
 
-export const saveTransactionWithToken = async (emailSend, externalReference, payment_id, carrito, total, clientData) => {
+export const saveTransactionWithToken = async ( items, externalReference, payment_id, carrito,  client, shippingCost) => {
   try {
-    if (!emailSend || !externalReference || !payment_id || !carrito) {
+
+    if (!items || !externalReference || !payment_id || !carrito || !client) {
       throw new DataInvalid();
     }
 
-    const transaction = await transactionsDao.postTransaction(emailSend, externalReference, payment_id, carrito, total, clientData)
+    const transaction = await transactionsDao.postTransaction(externalReference, payment_id, carrito, client, items, shippingCost)
 
     return transaction;
   } catch (error) {
@@ -27,20 +28,6 @@ export const findTransactionByPaymentId = async (payment_id) => {
   } catch (error) {
 
     throw new Error('Error al buscar la transacción');
-  }
-};
-
-export const updateTransactionStatus = async (externalReference, status, payment_id) => {
-  try {
-    if(!payment_id || !externalReference  || !status){
-      throw new DataInvalid()
-    }
-    const transaction = await transactionsDao.updateTransaction(externalReference, status, payment_id);
-
-    return transaction;
-  } catch (error) {
-
-    throw new Error('Error al actualizar el estado de la transacción');
   }
 };
 

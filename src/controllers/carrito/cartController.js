@@ -4,6 +4,7 @@ import { cartServices } from '../../services/carrito/cartServices.js'
 export const createCart = async (req, res, next) => {
   try {
     const cart = await cartServices.createCartService();
+
     res.status(201).json(cart);
 
   } catch (error) {

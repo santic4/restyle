@@ -4,13 +4,12 @@ import { findTransactionByPaymentId } from '../../services/transactions/transact
 import { paymentsServicesMP } from '../../services/payments/paymentServices.js';
 
 export const createOrderMP = async (req, res) => {
-
-    const { items, carrito, client, totalPrice, shippingCost } = req.body;
+    const { items, carrito, client } = req.body;
 
     try {
 
         const externalReference = generateToken();
-        const response = await paymentsServicesMP.createOrder(items, carrito, externalReference, client, totalPrice, shippingCost);
+        const response = await paymentsServicesMP.createOrder(items, carrito, externalReference, client);
 
         res.status(200).json(response);
     } catch (error) {
@@ -56,10 +55,20 @@ export const captureMP = async (req, res) => {
 
         if(foundedTransaction?.status === 'accredited'){
             return res.json({ 
-                status: 'Pago capturado exitosamente'
-              });
+              status: 'Pago capturado exitosamente'
+            });
         }
 
+        console.log(foundedTransaction?._id,'foundedTransaction?._id')
+
+        const transaction = {
+            idTransaction: foundedTransaction?._id,
+            carrito: foundedTransaction?.carrito,
+            email: foundedTransaction?.client?.email,
+            total: foundedTransaction?.total,
+        }
+
+        return transaction
     } catch (error) {
         logger.error(error, 'Error al procesar el pago');
         res.status(500).send('Error al procesar el pago');

@@ -23,7 +23,7 @@ class TransactionsDao {
       }
     }
 
-    async postTransaction(emailSend, externalReference, payment_id, carrito, total, clientData){
+    async postTransaction(externalReference, payment_id, carrito, client, items, shippingCost){
       try{
       const existingTransaction = await Transaction.findOne({ externalReference });
 
@@ -31,12 +31,12 @@ class TransactionsDao {
         const formattedDate = moment.tz('America/Argentina/Buenos_Aires').format('DD/MM/YYYY - HH:mm');
 
         const transaction = new Transaction({
-          emailSend: emailSend,
           externalReference,
           payment_id,
           carrito,
-          total,
-          clientData,
+          total: items.totalPrice,
+          client,
+          shippingCost,
           createdAt: formattedDate
         });
         await transaction.save();

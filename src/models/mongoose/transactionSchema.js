@@ -1,27 +1,32 @@
 import { Schema, model } from 'mongoose';
 
+const cartItemSchema = new Schema({
+  id: { type: String, required: true },
+  title: { type: String, required: true },
+  category_id: { type: String, required: true },
+  description: { type: String, required: true },
+  quantity: { type: Number, required: true },
+  unit_price: { type: Number, required: true }
+});
+
 const transactionSchema = new Schema({
-    externalReference: { type: String, required: true, sparse: true },
-    emailSend: { type: String, required: true },
-    status: { type: String, default: 'pending' },
-    payment_id: { type: String, sparse: true},
-    carrito: [
-      {
-        url: { type: String, required: true }, 
-        name: { type: String, required: true } 
-      }
-    ],
-    total: { type: Number },
-    clientData: {
-      Nombre: { type: String },
-      Apellido: { type: String },
-      CodArea: { type: String },
-      Telefono: { type: String },
-      DNI: { type: String },
-    },
-    completed: { type: Boolean, default: false },
-    createdAt: { type: String }
-  });
+  externalReference: { type: String, required: true, sparse: true },
+  status: { type: String, default: 'pending' },
+  payment_id: { type: String, sparse: true },
+  carrito: [cartItemSchema], 
+  total: { type: Number },
+  client: {
+    name: { type: String },
+    lastName: { type: String },
+    email: { type: String },
+    areaCode: { type: String },
+    phoneNumber: { type: String },
+    dni: { type: String },
+  },
+  shippingCost: { type: Number, sparse: true },
+  completed: { type: Boolean, default: false },
+  createdAt: { type: String }
+});
 
 const Transaction = model('Transaction', transactionSchema);
 

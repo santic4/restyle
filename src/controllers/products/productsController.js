@@ -123,8 +123,8 @@ export const postProduct = async (req, res, next) => {
 
 export const getAllProductsAdmin = async (req, res, next) => {
     try {
-console.log('entre')
-      logger.info('entre')
+      console.log('aentre al admin producs')
+      logger.info('producs')
         const productAdmin = await productServices.getAllProductsAdmin();
 
         res.json(productAdmin);

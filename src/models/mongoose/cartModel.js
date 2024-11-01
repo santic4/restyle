@@ -13,6 +13,7 @@ const cartItemSchema = new Schema({
 const cartSchema = new Schema({
   items: [cartItemSchema],
   totalPrice: { type: Number, default: 0 },
+  shippingCost: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
 });
 
