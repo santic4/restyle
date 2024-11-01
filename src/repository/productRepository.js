@@ -24,9 +24,9 @@ class ProductRepository{
         }
       };
 
-    async postProduct(userId, newData){
+    async postProduct(newData){
         try {
-            const newProduct = await productDao.postProduct(userId, newData)
+            const newProduct = await productDao.postProduct( newData)
 
             return newProduct
         } catch (error) {

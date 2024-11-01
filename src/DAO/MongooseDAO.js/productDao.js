@@ -38,10 +38,7 @@ class ProductDao{
         return await Product.findOne({ title: productName });
       }
 
-    async postProduct(userId, newData){
-
-      
-        newData.owner = userId;
+    async postProduct( newData){
 
         let inserted = false;
         let newProduct;
