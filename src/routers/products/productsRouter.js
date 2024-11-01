@@ -15,10 +15,6 @@ productsRouter.get('/:productName',
   getProductName
 );
 
-productsRouter.post('/', 
-  postProducto
-);
-
 // GET /products/category/
 productsRouter.get('/category', 
     getCategory

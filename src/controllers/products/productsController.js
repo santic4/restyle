@@ -52,41 +52,6 @@ export const getProductName = async (req, res) => {
   }
 };
 
-export const postProducto = async (req, res) => {
-  try {
-      // Datos del producto enviados en el cuerpo de la solicitud (body)
-      const { title, price, description, category, images, colors, tails } = req.body;
-
-      // Validar que los campos requeridos existan
-      if (!title || !price || !category || !images) {
-          return res.status(400).json({ message: 'Faltan campos requeridos' });
-      }
-
-      // Crear un nuevo producto
-      const newProduct = new Product({
-          title,
-          price,
-          description,
-          category,
-          images,
-          colors,
-          tails
-      });
-
-      // Guardar el producto en la base de datos
-      await newProduct.save();
-
-      // Enviar respuesta de éxito
-      res.status(201).json({
-          message: 'Producto agregado exitosamente',
-          product: newProduct
-      });
-  } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error al agregar el producto' });
-  }
-};
-
 export const postProduct = async (req, res, next) => {
   try {
     const newData = req.body;
