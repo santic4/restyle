@@ -96,6 +96,7 @@ export const postProduct = async (req, res, next) => {
 
     const imageUrls = [];
 
+    console.log(newData,'newdata', files,'files')
     // Subir imágenes a Firebase Storage
     for (const file of imageFiles) {
       const fileUpload = bucket.file(`images/${file.originalname}`);
@@ -107,6 +108,7 @@ export const postProduct = async (req, res, next) => {
     // Guardar las URLs en el objeto newData
     newData.images = imageUrls;
 
+    console.log(newData,'newdata2', req.user,'req.user')
     const newProduct = await productServices.postProduct(req.user, newData);
 
     res.json(newProduct);
