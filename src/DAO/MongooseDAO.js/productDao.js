@@ -67,9 +67,9 @@ class ProductDao{
     }
 
     async getAllProductsAdmin(){
-        console.log('dao')
+
         const productAdmin = await Product.find({}).lean();
-        console.log('despuets',productAdmin)
+ 
         return productAdmin
 
     }

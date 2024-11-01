@@ -10,6 +10,7 @@ import { MercadoPagoRouter } from './paymentsRouter/mercadoPagoRouter.js'
 import { categoryRouter } from './products/categoryRouter.js'
 import { CardsPay } from './paymentsRouter/cardsPay.js'
 import { adminRouter } from './admin/adminRouter.js'
+import { TransactionRouter } from './transactions/transactions.js'
 
 export const apiRouter = Router()
 
@@ -24,6 +25,8 @@ apiRouter.use('/carrito', carritoRouter)
 apiRouter.use('/mercado-pago', MercadoPagoRouter)
 apiRouter.use('/categorias', categoryRouter)
 apiRouter.use('/tarjetas', CardsPay)
+apiRouter.use('/transactions', TransactionRouter)
+
 
 
 

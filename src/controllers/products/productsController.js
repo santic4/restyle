@@ -93,11 +93,6 @@ export const postProduct = async (req, res, next) => {
     const { files } = req;
 
     const imageFiles = files.images || [];
-    const fileadjuntos = newData.fileadj || [];
-
-    if(fileadjuntos.length === 0){
-      throw new Error('Debes cargar archivos como producto.')
-    }
 
     const imageUrls = [];
 
@@ -123,8 +118,7 @@ export const postProduct = async (req, res, next) => {
 
 export const getAllProductsAdmin = async (req, res, next) => {
     try {
-      console.log('aentre al admin producs')
-      logger.info('producs')
+
         const productAdmin = await productServices.getAllProductsAdmin();
 
         res.json(productAdmin);
@@ -181,7 +175,6 @@ export const getFilteredProducts = async (req, res) => {
     query.title = new RegExp(name, 'i'); 
     
 }
-
 
   if (minPrice && maxPrice) {
       query.price = { $gte: minPrice, $lte: maxPrice };

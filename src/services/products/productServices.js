@@ -121,14 +121,9 @@ class ProductServices{
             newData.productData.images = updatedImageUrls;
         }
 
-        if (newData.productData.fileadj) {
-            newData.productData.fileadj = newData.productData.fileadj;
-        }
-
         if (typeof newData.productData === 'string') {
             newData.productData = JSON.parse(newData.productData);
         }
-
 
         const updProduct = await productRepository.updateProduct(pid, newData.productData)
 
