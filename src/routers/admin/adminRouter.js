@@ -27,10 +27,10 @@ adminRouter.post('/featured-products', async (req, res) => {
     
     const schema = {
       _id:body._id,
-      images: body.images,
       title: body.title,
       price: body.price,
-      category: body.category
+      category: body.category,
+      images: body.images
     }
 
     const newProduct = await FeaturedProducts.create(schema);

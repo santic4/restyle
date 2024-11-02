@@ -79,8 +79,9 @@ class ProductDao{
 
     async getProductId(pid){
 
+        console.log('hola', pid)
         const productoPorId = await Product.findById(pid);
-
+        console.log('productoPorId',productoPorId)
         return productoPorId;
     
     }

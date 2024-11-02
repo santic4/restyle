@@ -19,7 +19,6 @@ class CartDao {
       const idCarritoSelec = await Cart.findById(cid)
         .populate('items.productID');
       
-      console.log(idCarritoSelec,'idcarrito')
 
       return idCarritoSelec
     }catch(error){
