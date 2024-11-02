@@ -15,7 +15,7 @@ class CartServices {
   };
 
   async addProductToCartService(cartId, productId, quantity, color, tails){
-
+    
     const product = await productServices.getProductId(productId);
 
     if (!product) throw new Error('Producto no encontrado');
