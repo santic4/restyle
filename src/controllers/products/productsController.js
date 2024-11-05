@@ -2,16 +2,17 @@ import { bucket } from "../../config/firebase-config.js";
 import { Category } from "../../models/mongoose/categories.js";
 import { Product } from "../../models/mongoose/productModel.js";
 import { productServices } from "../../services/products/productServices.js";
-import { logger } from "../../utils/logger.js";
 
 export const getAllProducts = async (req, res) => {
   try {
     const { page = 1, limit = 10, category, colors, sort } = req.query;
 
+    let normalizedCategory = category ? category.replace(/-/g, ' ').toUpperCase() : null;
+
     // Filtros dinámicos
     let filters = {};
-    if (category) {
-      filters.category = category;
+    if (normalizedCategory) {
+      filters.category = { $regex: normalizedCategory, $options: 'i' }; 
     }
     if (colors) {
       filters.colors = { $in: colors.split(',') }; 
@@ -25,7 +26,6 @@ export const getAllProducts = async (req, res) => {
       sortOption.price = -1; // Descendente
     }
 
-    // Paginar los resultados
     const options = {
       page: parseInt(page, 10),
       limit: parseInt(limit, 10),
