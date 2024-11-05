@@ -11,6 +11,10 @@ const schemaProduct = new Schema ({
         type: Number,
         required: true
     },
+    discountPrice: {
+      type: Number,
+      required: false, 
+    },
     description: {
         type: String
     },

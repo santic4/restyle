@@ -54,7 +54,7 @@ class ProductServices{
             throw new PermissionsError();
         }
 
-        const newProduct = await productRepository.postProduct( newData)
+        const newProduct = await productRepository.postProduct(newData)
 
         return newProduct
     }

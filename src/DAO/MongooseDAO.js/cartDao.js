@@ -36,16 +36,18 @@ class CartDao {
 
     const existingProductIndex = cart.items.findIndex(item => item.productID.equals(product._id));
   
+    const finalPrice = product.discountPrice || product.price;
+
     if (existingProductIndex !== -1) {
 
       cart.items[existingProductIndex].quantity += quantity;
-    } else {
 
+    } else {
       cart.items.push({
         productID: product._id,
         title: product.title,
         quantity: quantity,
-        price: product.price,
+        price: finalPrice,
         images: Array.isArray(product.images) ? product.images : [],
         colorSelected: color,
         tailSelected: tail,
@@ -53,7 +55,7 @@ class CartDao {
     }
   
     // Calcular el precio total
-    const totalPrice = cart.items.reduce((total, item) => total + item.quantity * item.price, 0);
+    const totalPrice = cart.items.reduce((total, item) => total + item.quantity * finalPrice, 0);
   
     // Actualizar el carrito en la base de datos usando `findOneAndUpdate`
     const updatedCart = await Cart.findOneAndUpdate(
