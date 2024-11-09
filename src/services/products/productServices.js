@@ -93,8 +93,6 @@ class ProductServices{
 
         const product = await productRepository.getProductId(pid);
 
-        console.log(pid,'update', newData,'newData', files,'files')
-        
         if (!product) {
             throw new NotFoundError();
         }
@@ -125,9 +123,6 @@ class ProductServices{
             newData.productData = JSON.parse(newData.productData);
         }
 
-        
-        console.log(pid,'update2', newData,'newData2', files,'files2')
-        
         const updProduct = await productRepository.updateProduct(pid, newData.productData)
 
         if (!updProduct) {
@@ -152,15 +147,11 @@ class ProductServices{
     
         // Encuentra el producto por ID
         const product = await productRepository.getProductId(pid);
-        console.log(product, 'product en deleteProduct');
-    
+
         if (!product) {
             throw new Error('Producto no encontrado');
         }
-    
-        console.log(`Ruta a la carpeta de fotos: ${photosDirectory}`);
-    
-    
+
         // Elimina el producto de la base de datos
         const delProducto = await productRepository.deleteProduct(pid);
     

@@ -78,17 +78,15 @@ class ProductDao{
     }
 
     async getProductId(pid){
-
-        console.log('hola', pid)
         const productoPorId = await Product.findById(pid);
-        console.log('productoPorId',productoPorId)
+        
         return productoPorId;
-    
     }
 
 
 
     async updateProduct(pid, newData){
+        console.log(newData,'newData')
         const updProduct = await Product.findByIdAndUpdate(
             pid,
             { $set: newData },
