@@ -90,7 +90,8 @@ class ProductServices{
     
 
     async updateProduct(pid, newData, files){
-
+        console.log(newData,'newDataServices')
+        console.log(files,'filesServices')
         const product = await productRepository.getProductId(pid);
 
         if (!product) {
