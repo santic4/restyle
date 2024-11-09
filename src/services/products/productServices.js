@@ -98,10 +98,6 @@ class ProductServices{
             throw new NotFoundError();
         }
 
-        if (typeof newData.productData === 'string') {
-            newData.productData = JSON.parse(newData.productData);
-        }
-
         if(files.images){
             const imageFiles = files.images || [];
 
@@ -117,14 +113,11 @@ class ProductServices{
     
             const updatedImageUrls = [...(product.images || []), ...imageUrls];
     
-            newData.productData.images = updatedImageUrls;
+            newData.images = updatedImageUrls;
         }
 
-        if (typeof newData.productData === 'string') {
-            newData.productData = JSON.parse(newData.productData);
-        }
 
-        const updProduct = await productRepository.updateProduct(pid, newData.productData)
+        const updProduct = await productRepository.updateProduct(pid, newData)
 
         if (!updProduct) {
             throw new Error(`El producto con id ${pid} no se encontró`);
