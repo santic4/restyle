@@ -93,7 +93,7 @@ class ProductServices{
 
         const product = await productRepository.getProductId(pid);
 
-        console.log('update',pid, newData, files)
+        console.log(pid,'update', newData,'newData', files,'files')
         
         if (!product) {
             throw new NotFoundError();
@@ -125,6 +125,9 @@ class ProductServices{
             newData.productData = JSON.parse(newData.productData);
         }
 
+        
+        console.log(pid,'update2', newData,'newData2', files,'files2')
+        
         const updProduct = await productRepository.updateProduct(pid, newData.productData)
 
         if (!updProduct) {
