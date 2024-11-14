@@ -59,39 +59,9 @@ class ProductServices{
         return newProduct
     }
 
-
-    async getAllProductsAdmin(){
-        
-        const productAdmin = await productRepository.getAllProductsAdmin()
-
-        return productAdmin
-    }
-
-    async getCategory(category){
-        if(!category){
-            throw new DataInvalid()
-        }
-        const categoryProducts = await productRepository.getCategory(category);
-
-
-        return categoryProducts
-    }
-
-    async getProductId(pid){
-   
-        const product = await productRepository.getProductId(pid)
-   
-        if(!product){
-            throw new NotFoundError()
-        }
-
-        return product
-    }
     
-
     async updateProduct(pid, newData, files){
-        console.log(newData,'newDataServices')
-        console.log(files,'filesServices')
+
         const product = await productRepository.getProductId(pid);
 
         if (!product) {
@@ -125,6 +95,37 @@ class ProductServices{
 
         return updProduct
     }
+
+
+
+    async getAllProductsAdmin(){
+        
+        const productAdmin = await productRepository.getAllProductsAdmin()
+
+        return productAdmin
+    }
+
+    async getCategory(category){
+        if(!category){
+            throw new DataInvalid()
+        }
+        const categoryProducts = await productRepository.getCategory(category);
+
+
+        return categoryProducts
+    }
+
+    async getProductId(pid){
+   
+        const product = await productRepository.getProductId(pid)
+   
+        if(!product){
+            throw new NotFoundError()
+        }
+
+        return product
+    }
+    
 
     async deleteProduct(pid, userId) {
         // Encuentra al usuario

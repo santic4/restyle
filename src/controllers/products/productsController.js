@@ -81,6 +81,24 @@ export const postProduct = async (req, res, next) => {
   }
 };
 
+
+// 
+
+export const updateProduct = async (req, res, next) => {
+  try{
+    
+    const { files } = req;
+
+    const updProduct = await productServices.updateProduct(req.params.pid, req.body, files)
+  
+    res.json(updProduct)
+
+  }catch(err){
+      next(err)
+  }
+}
+
+
 export const getAllProductsAdmin = async (req, res, next) => {
     try {
 
@@ -182,22 +200,6 @@ export const check = async (req, res, next) => {
 }
 
 
-
-// 
-
-export const updateProduct = async (req, res, next) => {
-  try{
-    
-    const { files } = req;
-
-    const updProduct = await productServices.updateProduct(req.params.pid, req.body, files)
-  
-    res.json(updProduct)
-
-  }catch(err){
-      next(err)
-  }
-}
 
 export const deleteProduct = async (req, res, next) => {
   try{
