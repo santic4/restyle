@@ -14,15 +14,6 @@ productsRouter.get('/:productName',
   getProductName
 );
 
-// GET /products/category/
-productsRouter.get('/category', 
-    getCategory
-)
-
-productsRouter.get('/filter', 
-    getFilteredProducts
-)
-
 
 // GET /products/pid
 productsRouter.get('/id/:pid', 
