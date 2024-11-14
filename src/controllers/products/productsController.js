@@ -5,7 +5,7 @@ import { productServices } from "../../services/products/productServices.js";
 
 export const getAllProducts = async (req, res) => {
   try {
-    const { page = 1, limit = 8, category, colors, sort } = req.query;
+    const { page = 1, limit = 10, category, colors, sort } = req.query;
 
     let normalizedCategory = category ? category.replace(/-/g, ' ').toUpperCase() : null;
 
@@ -27,8 +27,8 @@ export const getAllProducts = async (req, res) => {
     }
 
     const options = {
-      page: parseInt(page, 8),
-      limit: parseInt(limit, 8),
+      page: parseInt(page, 10),
+      limit: parseInt(limit, 10),
       sort: sortOption,
     };
 
