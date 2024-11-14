@@ -3,7 +3,6 @@ import { deleteProduct, getAllProducts, getAllProductsAdmin, getCategory, getFil
 import { passportAuth } from '../../middlewares/passport.js';
 import { adminsOnly } from '../../middlewares/authorizationUserAdmin.js';
 import { upload } from '../../middlewares/multer.js';
-import { FeaturedProducts } from '../../models/mongoose/featuredModel.js';
 
 export const productsRouter = Router()
 
