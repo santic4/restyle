@@ -20,6 +20,7 @@ class CartServices {
 
     if (!product) throw new Error('Producto no encontrado');
 
+    console.log(cartId,'cartId',product,' product', quantity,'quantity', color,'color', tails ,'tails')
     const response = await cartDao.addProductToCartDAO(cartId, product, quantity, color, tails);
     return response
   };

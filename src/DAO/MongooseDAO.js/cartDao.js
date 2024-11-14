@@ -27,15 +27,20 @@ class CartDao {
   }
 
   async addProductToCartDAO(cartId, product, quantity, color, tail) {
+   
     // Buscar el carrito por su ID
     const cart = await Cart.findById(cartId);
-  
+
     if (!cart) {
       throw new Error('No existe el carrito');
     }
 
-    const existingProductIndex = cart.items.findIndex(item => item.productID.equals(product._id));
-  
+    const existingProductIndex = cart.items.findIndex(item => 
+      item.title === product.title &&
+      item.colorSelected === color && 
+      item.tailSelected === tail
+    );
+
     const finalPrice = product.discountPrice || product.price;
 
     if (existingProductIndex !== -1) {
@@ -56,6 +61,7 @@ class CartDao {
   
     // Calcular el precio total
     const totalPrice = cart.items.reduce((total, item) => total + item.quantity * finalPrice, 0);
+
   
     // Actualizar el carrito en la base de datos usando `findOneAndUpdate`
     const updatedCart = await Cart.findOneAndUpdate(
@@ -63,7 +69,7 @@ class CartDao {
       { items: cart.items, totalPrice: totalPrice },
       { new: true } // Esto devuelve el documento actualizado
     );
-  
+
     return updatedCart;
   }
   
