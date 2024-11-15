@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Página principal -->
+  <url>
+    <loc>https://indisindumentaria.com.ar/</loc>
+    <lastmod>2024-11-14T23:33:56+00:00</lastmod>
+  </url>
+  
+  <!-- Página de productos -->
+  <url>
+    <loc>https://indisindumentaria.com.ar/productos</loc>
+    <lastmod>2024-11-14T23:33:56+00:00</lastmod>
+  </url>
+  
+  <!-- Páginas de categorías de productos (ejemplo de categorías) -->
+  <url>
+    <loc>https://indisindumentaria.com.ar/productos/remeras-oversize</loc>
+    <lastmod>2024-11-14T23:33:56+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://indisindumentaria.com.ar/productos/musculosas</loc>
+    <lastmod>2024-11-14T23:33:56+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://indisindumentaria.com.ar/productos/puperas</loc>
+    <lastmod>2024-11-14T23:33:56+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://indisindumentaria.com.ar/productos/buzos-frizados</loc>
+    <lastmod>2024-11-14T23:33:56+00:00</lastmod>
+  </url>
+  
+  <!-- Página de preguntas frecuentes -->
+  <url>
+    <loc>https://indisindumentaria.com.ar/faqs</loc>
+    <lastmod>2024-11-14T23:33:56+00:00</lastmod>
+  </url>
+  
+  <!-- Página de checkout -->
+  <url>
+    <loc>https://indisindumentaria.com.ar/checkout</loc>
+    <lastmod>2024-11-14T23:33:56+00:00</lastmod>
+  </url>
+  
+  <!-- Página de login -->
+  <url>
+    <loc>https://indisindumentaria.com.ar/login</loc>
+    <lastmod>2024-11-14T23:33:56+00:00</lastmod>
+  </url>
+  
+  <!-- Página de administración (acceso restringido, pero se debe incluir en el sitemap) -->
+  <url>
+    <loc>https://indisindumentaria.com.ar/admin</loc>
+    <lastmod>2024-11-14T23:33:56+00:00</lastmod>
+  </url>
+  
+  <!-- Página de pago completado -->
+  <url>
+    <loc>https://indisindumentaria.com.ar/pago-completado</loc>
+    <lastmod>2024-11-14T23:33:56+00:00</lastmod>
+  </url>
+  
+</urlset>
