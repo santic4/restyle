@@ -22,6 +22,9 @@ const schemaProduct = new Schema ({
         type: String,
         required: true
     },
+    subcategory: {
+        type: String
+    },
     images: {
         type: [String], 
         required: true

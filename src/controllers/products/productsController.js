@@ -7,6 +7,7 @@ export const getAllProducts = async (req, res) => {
   try {
     const { page = 1, limit = 10, category, colors, sort } = req.query;
 
+    console.log(category,'category backend')
     let normalizedCategory = category ? category.replace(/-/g, ' ').toUpperCase() : null;
 
     // Filtros dinámicos
