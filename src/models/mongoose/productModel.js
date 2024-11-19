@@ -38,6 +38,9 @@ const schemaProduct = new Schema ({
     stock: { type: Number,
         default: 0 
     },
+    posicion: { type: Number,
+        default: 0
+    },
 }, {
     strict: 'throw',
     versionKey: false,

@@ -5,41 +5,72 @@ import { productServices } from "../../services/products/productServices.js";
 
 export const getAllProducts = async (req, res) => {
   try {
-    const { page = 1, limit = 10, category, colors, sort } = req.query;
+    const { page = 1, limit = 10, category, subcategory, colors, sort } = req.query;
 
-    console.log(category,'category backend')
-    let normalizedCategory = category ? category.replace(/-/g, ' ').toUpperCase() : null;
+    // Normalización de categorías y subcategorías
+    const normalizedCategory = category ? category.replace(/-/g, ' ').toUpperCase() : null;
+    const normalizedSubcategory = subcategory ? subcategory.replace(/-/g, ' ').toUpperCase() : null;
 
-    // Filtros dinámicos
-    let filters = {};
+    // Construcción de filtros dinámicos
+    const filters = {};
     if (normalizedCategory) {
-      filters.category = { $regex: normalizedCategory, $options: 'i' }; 
+      filters.category = { $regex: normalizedCategory, $options: 'i' };
+    }
+    if (normalizedSubcategory) {
+      filters.subcategory = { $regex: normalizedSubcategory, $options: 'i' };
     }
     if (colors) {
-      filters.colors = { $in: colors.split(',') }; 
+      filters.colors = { $in: colors.split(',') };
     }
 
-    // Opciones de orden
-    let sortOption = {};
+    // Construcción de opciones de orden
+    let sortOption = { posicion: 1 }; // Por defecto, ordenar por posición
     if (sort === 'Menor a mayor precio') {
-      sortOption.price = 1; // Ascendente
+      sortOption = {  price: 1, posicion: 1};
     } else if (sort === 'Mayor a menor precio') {
-      sortOption.price = -1; // Descendente
+      sortOption = { price: -1, posicion: 1 };
     }
 
+    // Opciones de paginación
     const options = {
       page: parseInt(page, 10),
       limit: parseInt(limit, 10),
       sort: sortOption,
     };
 
-    const result = await Product.paginate(filters, options);
+    // Consulta para productos con posición
+    const withPosition = await Product.paginate({ ...filters, posicion: { $ne: null } }, options);
 
-    res.status(200).json(result); 
+    // Consulta para productos sin posición
+    const withoutPosition = await Product.find({ ...filters, posicion: null })
+      .lean()
+      .sort({ createdAt: -1 }); // Productos sin posición se ordenan por fecha de creación
+
+    // Mezclar productos sin posición aleatoriamente
+    withoutPosition.sort(() => Math.random() - 0.5);
+
+    // Combinar resultados
+    const combinedResults = [...withPosition.docs, ...withoutPosition.slice(0, limit - withPosition.docs.length)];
+
+    // Calcular total y páginas
+    const totalDocs = withPosition.totalDocs + withoutPosition.length;
+    const totalPages = Math.ceil(totalDocs / limit);
+
+    // Respuesta final
+    res.status(200).json({
+      docs: combinedResults,
+      totalDocs,
+      totalPages,
+      currentPage: page,
+      hasNextPage: page < totalPages,
+    });
   } catch (error) {
+    console.error('Error al obtener productos:', error);
     res.status(500).json({ message: 'Error al obtener productos', error });
   }
 };
+
+
 
 export const getProductName = async (req, res) => {
   const { productName } = req.params;
