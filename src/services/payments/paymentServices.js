@@ -4,7 +4,7 @@ import { DataInvalid } from '../../models/errors/dataInvalid.js';
 import { ACCESS_TOKEN_MP } from '../../config/config.js';
 
 const clientConfig = new MercadoPagoConfig({
-    accessToken: 'APP_USR-4646418936536455-051102-9c9a15b2c4e55bc8b7ca461272059450-1808896698',
+    accessToken: ACCESS_TOKEN_MP,
     options: { timeout: 20000, idempotencyKey: 'abc' }
 })
 
@@ -37,12 +37,12 @@ class PaymentsServicesMP{
 
             const response = await preference.create({
                 body: {
-                    additional_info: 'RESTYLE',
+                    additional_info: 'INDIS Ind.',
                     auto_return: 'approved',
                     back_urls: {
-                        success: 'https://1e70-191-102-247-165.ngrok-free.app/pago-completado',
-                        failure: 'https://1e70-191-102-247-165.ngrok-free.app',
-                        pending: 'https://1e70-191-102-247-165.ngrok-free.app'
+                        success: 'https://indisindumentaria.com.ar/pago-completado',
+                        failure: 'https://indisindumentaria.com.ar/',
+                        pending: 'https://indisindumentaria.com.ar/'
                     },
                     expiration_date_from: new Date().toISOString(),
                     expiration_date_to: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString(), 
@@ -58,7 +58,7 @@ class PaymentsServicesMP{
                             unit_price: costShip,
                         }
                     ],
-                    notification_url: 'https://1e70-191-102-247-165.ngrok-free.app/api/tarjetas/webhook',
+                    notification_url: 'https://indisindumentaria.com.ar/api/tarjetas/webhook',
                     payer: {
                         name: client.name,
                         surname: client.lastName,

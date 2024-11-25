@@ -59,9 +59,11 @@ class CartDao {
       });
     }
   
-    // Calcular el precio total
-    const totalPrice = cart.items.reduce((total, item) => total + item.quantity * finalPrice, 0);
-
+    // Calcular el precio total actualizado
+    const totalPrice = cart.items.reduce((total, item) => {
+      const itemPrice = item.price; // Usa el precio del producto en el carrito
+      return total + item.quantity * itemPrice;
+    }, 0);
   
     // Actualizar el carrito en la base de datos usando `findOneAndUpdate`
     const updatedCart = await Cart.findOneAndUpdate(
