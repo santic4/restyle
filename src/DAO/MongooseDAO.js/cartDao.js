@@ -52,6 +52,8 @@ class CartDao {
         productID: product._id,
         title: product.title,
         quantity: quantity,
+        description: product.subcategory,
+        category: product.category,
         price: finalPrice,
         images: Array.isArray(product.images) ? product.images : [],
         colorSelected: color,

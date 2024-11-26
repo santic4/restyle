@@ -13,6 +13,7 @@ class PaymentsServicesMP{
     async createOrder(items, carrito, externalReference, client){
 
         try {
+            console.log(carrito,'carrito en pago')
 
             if (!client) {
                 throw new Error('Falta información requerida (información personal)');
@@ -81,6 +82,8 @@ class PaymentsServicesMP{
                     }
                 }
             });
+
+            console.log(response,'response')
 
             const shippingCost = items.shippingCost;
 
