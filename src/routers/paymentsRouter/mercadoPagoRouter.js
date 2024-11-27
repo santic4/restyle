@@ -29,7 +29,6 @@ MercadoPagoRouter.post('/installments', async (req, res) => {
     const { method_id, amount} = req.body;
 
     try {
-        console.log(method_id,'method', amount)
         const response = await fetch(`https://api.mercadopago.com/v1/payment_methods/installments?amount=${amount}&payment_method_id=${method_id}`, {
             headers: {
               Authorization: `Bearer ${ACCESS_TOKEN_MP}`,
@@ -55,9 +54,9 @@ MercadoPagoRouter.get('/pending', (req, res) => {
     res.redirect('/checkout'); 
 });
 
-MercadoPagoRouter.post('/capture-order', (req, res) => {
+MercadoPagoRouter.get('/capture-order', 
     captureMP
-});
+);
 
 MercadoPagoRouter.post('/webhook', webHookMP)
 

@@ -23,7 +23,7 @@ export const successOrder = async (req, res) => {
         const{ payment_id} = req.query;
 
         if (payment_id) {
-            res.redirect(`https://restyle-869o.onrender.com?payment_id=${payment_id}`);
+            res.redirect(`https://indisindumentaria.com.ar?payment_id=${payment_id}`);
         } else {
             throw new Error('Transacción no encontrada o no coincide con el payment_id');
         }
@@ -49,17 +49,13 @@ export const captureMP = async (req, res) => {
     const payment = req.query;
 
     try {
+        const payment_id = payment.payment_id;
 
-        const foundedTransaction = await findTransactionByPaymentId(payment)
+        const foundedTransaction = await findTransactionByPaymentId(payment_id)
 
-
-        if(foundedTransaction?.status === 'accredited'){
-            return res.json({ 
-              status: 'Pago capturado exitosamente'
-            });
+        if (foundedTransaction?.status !== 'accredited') {
+            throw new Error('La transacción no está acreditada.');
         }
-
-        console.log(foundedTransaction?._id,'foundedTransaction?._id')
 
         const transaction = {
             idTransaction: foundedTransaction?._id,
@@ -68,9 +64,8 @@ export const captureMP = async (req, res) => {
             total: foundedTransaction?.total,
         }
 
-        return transaction
+        return res.status(200).json(transaction);
     } catch (error) {
-        logger.error(error, 'Error al procesar el pago');
         res.status(500).send('Error al procesar el pago');
     }
 };

@@ -1,9 +1,8 @@
 import { Schema, model } from 'mongoose';
 
 const cartItemSchema = new Schema({
-  id: { type: String, required: true },
   title: { type: String, required: true },
-  category_id: { type: String, default: 'N/A' },
+  currency_id: { type: String, default: 'ARS' },
   description: { type: String, default: 'N/A' },
   quantity: { type: Number, required: true },
   unit_price: { type: Number, required: true }

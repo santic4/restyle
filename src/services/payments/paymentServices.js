@@ -2,6 +2,7 @@ import { MercadoPagoConfig, Payment, Preference } from 'mercadopago';
 import { findTransactionByPaymentId, saveTransactionWithToken, updateTransactionStatusMercadoPago } from '../transactions/transactionServicesMP.js';
 import { DataInvalid } from '../../models/errors/dataInvalid.js';
 import { ACCESS_TOKEN_MP } from '../../config/config.js';
+import { cartServicesMP } from '../email/emailProducts.js';
 
 const clientConfig = new MercadoPagoConfig({
     accessToken: ACCESS_TOKEN_MP,
@@ -13,7 +14,6 @@ class PaymentsServicesMP{
     async createOrder(items, carrito, externalReference, client){
 
         try {
-            console.log(carrito,'carrito en pago')
 
             if (!client) {
                 throw new Error('Falta información requerida (información personal)');
@@ -28,7 +28,7 @@ class PaymentsServicesMP{
             }
 
             carrito.forEach(item => {
-                if (!item.id || !item.title || !item.quantity || !item.unit_price) {
+                if (!item.title || !item.quantity || !item.unit_price) {
                     throw new Error('Uno o más artículos del carrito no tienen todos los campos necesarios.');
                 }
             });  
@@ -83,7 +83,6 @@ class PaymentsServicesMP{
                 }
             });
 
-            console.log(response,'response')
 
             const shippingCost = items.shippingCost;
 
@@ -104,7 +103,7 @@ class PaymentsServicesMP{
         const application = new Payment(clientConfig);
             try {
 
-                if (payment.type === 'payment') {
+              if (payment.type === 'payment') {
             
                 const captureResult = await application.capture({
                     id: payment['data.id'],
@@ -116,13 +115,14 @@ class PaymentsServicesMP{
                 if (captureResult.status !== 'approved' ) {
                     throw new Error('Pago rechazado.')
                 }
-            
+
                 if (captureResult.status_detail === 'accredited' ) {
                     await updateTransactionStatusMercadoPago(captureResult.external_reference, captureResult.status_detail, captureResult.id);
-          
                 }
                 
                 const foundedTransaction = payment['data.id'] ? await findTransactionByPaymentId(payment['data.id']) : null;
+
+                await cartServicesMP.sendEmailProducts(foundedTransaction);
 
                 return foundedTransaction;
             
@@ -131,8 +131,7 @@ class PaymentsServicesMP{
               }
 
             }catch (error) {
-                console.error('Error en createOrderMP:', error);
-                    throw new Error('No se puede realizar el pago.');
+                throw new Error('No se puede realizar el pago.');
             }
     }
 }
