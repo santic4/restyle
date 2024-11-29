@@ -5,7 +5,7 @@ import { productServices } from "../../services/products/productServices.js";
 
 export const getAllProducts = async (req, res) => {
   try {
-    const { page = 1, limit = 10, category, subcategory, colors, sort } = req.query;
+    const { page = 1, limit = 12, category, subcategory, colors, sort } = req.query;
 
     // Normalización de categorías y subcategorías
     const normalizedCategory = category ? category.replace(/-/g, ' ').toUpperCase() : null;

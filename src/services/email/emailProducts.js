@@ -67,10 +67,15 @@ class CartServicesMP {
         message
       );
 
-      // Marcar la transacción como completada
-      await transactionsDao.updateTransactionByPaymentId(transaction._id, {
+      console.log(transaction,'transaction antes de mandar mail')
+      
+      const transactionId = transaction._id;
+
+      const transactionSend = await transactionsDao.updateTransactionByPaymentId(transactionId, {
         completed: true,
       });
+
+      return transactionSend
     } catch (error) {
       throw new Error("No se pudo enviar el mail.");
     }
