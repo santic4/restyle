@@ -11,7 +11,7 @@ import { MONGODB, PORT } from '../config/config.js';
 import { logger } from '../utils/logger.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
- import cors from 'cors'
+import cors from 'cors'
 
 dotenv.config()
 export const app = express();
@@ -77,7 +77,7 @@ await mongoose.connect(MONGODB)
 export const PUERTO = PORT || 8080;
 
 logger.info('Conectado a DB MONGO')
-// console.log(cpus())
+
 app.listen(PUERTO, () => { logger.info(`escuchando en puerto ${PUERTO}`) })
 
 
